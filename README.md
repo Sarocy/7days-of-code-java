@@ -3,7 +3,7 @@ Saúde Diária - Projeto do 7 Days of Code com Java e Spring Boot, na plataforma
 
 ## 📜 Descrição
 
-O projeto "7 Days of Code" é uma série de desafios diários, onde desenvolvemos uma aplicação completa chamada Diário de Saúde. Esta aplicação permite que os usuários registrem e acompanhem seus hábitos diários, como exercícios, refeições e sono. Ao final, você terá implementado funcionalidades completas de cadastro, edição, exclusão e geração de relatórios, tudo integrado com uma interface web usando Thymeleaf.
+O projeto "7 Days of Code" é uma série de desafios diários, onde desenvolvemos uma aplicação completa chamada Diário de Saúde. Aqui vamos permitir que os usuários registrem e acompanhem seus hábitos diários, como exercícios, refeições e sono e ao final, você terá implementado funcionalidades completas de cadastro, edição, exclusão e geração de relatórios, tudo integrado com uma interface web usando Thymeleaf.
 
 ## 📆 Estrutura
 
