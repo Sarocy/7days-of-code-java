@@ -1,18 +1,14 @@
 # 7 Days of Code: Java com Spring Boot! 🚀
 
-## 💻 Dia 04: Criação dos Controladores e Rotas Básicas
+## 💻 Dia 06: Integração de Refeição e Sono com o Frontend 
 ### 🚀 O Desafio de Hoje
 
-No quarto dia do desafio, você vai criar os controladores que serão responsáveis por gerenciar as rotas e interações com os dados das entidades Exercicio, Refeicao e Sono. Eles definirão os endpoints para operações de CRUD, permitindo que o sistema gerencie registros de forma eficiente :)
+No sexto dia do desafio, vamos aplicar o que aprendemos no dia 5 porém para integrar as entidades `Refeicao` e `Sono` com o frontend. Nosso objetivo é permitir que o usuário possa listar, adicionar, editar e excluir registros de `Refeicao` e `Sono` diretamente nas páginas HTML, aproveitando o poder do Thymeleaf para renderização dinâmica.
 
 ### 🛠️ O que fizemos?
-- Criação dos Controladores:
-  - Criamos as classes ExercicioController, RefeicaoController e SonoController.
-  - Definimos as rotas principais /exercicio, /refeicao e /sono usando @RequestMapping.
+- Atualizamos os controladores `RefeicaoController` e `SonoController` para que, assim como o `ExercicioController`, eles processassem os dados das respectivas entidades e os passassem para a página HTML, incluindo métodos para listar, salvar, editar e excluir registros.
 
-- Definição das Rotas e Métodos:
-  - Implementamos o método GET para listar todos os registros em /listar.
-  - Implementamos o método POST para salvar novos registros em /salvar.
-  - Implementamos PUT para a atualização de registros existentes em /editar/{id}.
-  - Implementamos o método DELETE para excluir registros por ID em /excluir/{id}.
+- Modificamos o `crud.html` adaptando o layout da página para exibir `Refeicao` e `Sono` de forma dinâmica, usando th:each para listar registros em suas seções específicas.
+
+- Assim como no dia anterior, criamos formulários para adicionar e editar `Refeicao` e `Sono`, usando th:object e th:field para vincular os campos aos atributos das entidades.
 
