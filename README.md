@@ -8,7 +8,7 @@ No sexto dia do desafio, vamos aplicar o que aprendemos no dia 5 porém para int
 ### 🛠️ O que fizemos?
 - Atualizamos os controladores `RefeicaoController` e `SonoController` para que, assim como o `ExercicioController`, eles processassem os dados das respectivas entidades e os passassem para a página HTML, incluindo métodos para listar, salvar, editar e excluir registros.
 
-- Modificamos o `crud.html` adaptando o layout da página para exibir `Refeicao` e `Sono` de forma dinâmica, usando th:each para listar registros em suas seções específicas.
+- Modificamos o `crud.html` adaptando o layout da página para exibir `Refeicao` e `Sono` de forma dinâmica, usando `th:each` para listar registros em suas seções específicas.
 
-- Assim como no dia anterior, criamos formulários para adicionar e editar `Refeicao` e `Sono`, usando th:object e th:field para vincular os campos aos atributos das entidades.
+- Assim como no dia anterior, criamos formulários para adicionar e editar `Refeicao` e `Sono`, usando `th:object` e `th:field` para vincular os campos aos atributos das entidades.
 
