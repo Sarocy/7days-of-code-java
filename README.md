@@ -11,11 +11,11 @@ Cada branch deste repositório contém o código para um dia específico do desa
 
 - `day-01`: Configuração Inicial do Projeto, Spring Boot e Thymeleaf
 - `day-02`: Criação das Entidades e Configuração do Banco de Dados (H2/MySQL)
-- `day-03`: Implementação do Cadastro de Dados (Exercícios, Refeições, Sono)
-- `day-04`: Exibição de Dados Cadastrados
-- `day-05`: Funcionalidade de Atualização de Dados
-- `day-06`: Funcionalidade de Exclusão de Dados
-- `day-07`: Geração de Relatórios e Visualização de Hábitos com Gráficos
+- `day-03`: Criação dos Repositórios
+- `day-04`: Criação dos Controladores e Rotas Básicas
+- `day-05`: Integração de Exercício com um Frontend
+- `day-06`: Integração de Refeição e Sono com o Frontend
+- `day-07`: Criação de um Relatórios de Hábitos
 
 ## 📚 Tecnologias Utilizadas
 
@@ -47,3 +47,8 @@ Cada branch deste repositório contém o código para um dia específico do desa
 
 Veja a conclusão do projeto:
 
+![Captura de tela 2024-11-07 193220](https://github.com/user-attachments/assets/529de8f6-be0e-4f27-a8db-b9cbbb9edeac)
+
+![image](https://github.com/user-attachments/assets/07764956-4b6d-4bd6-ba6e-048cedb5aa3d)
+
+![image](https://github.com/user-attachments/assets/47dd4ba6-2267-4994-8656-32478a9d3e10)
