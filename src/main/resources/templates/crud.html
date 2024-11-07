@@ -94,14 +94,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Data</td>
-                            <td>Tipo da Refeição</td>
-                            <td>Descrição da Refeição</td>
-                            <td>Calorias</td>
+                        <tr th:each="refeicao : ${refeicoes}">
+                            <td th:text="${refeicao.data}">Data</td>
+                            <td th:text="${refeicao.tipo}">Tipo da Refeição</td>
+                            <td th:text="${refeicao.nome}">Descrição da Refeição</td>
+                            <td th:text="${refeicao.quantidade}">Calorias</td>
                             <td>
-                                <a class="btn">Editar</a>
-                                <a class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                                <a href="javascript:void(0);" 
+                                   class="btn" 
+                                   th:attr="data-id=${refeicao.id}, 
+                                            data-data=${refeicao.data},
+                                            data-tipo=${refeicao.tipo},
+                                            data-nome=${refeicao.nome},
+                                            data-quantidade=${refeicao.quantidade}"
+                                   onclick="editRefeicao(this)">
+                                   Editar
+                                </a>
+                                <a th:href="@{'/refeicao/excluir/' + ${refeicao.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                             </td>
                         </tr>
                     </tbody>
@@ -124,14 +133,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Data</td>
-                            <td>Quantidade de Horas</td>
-                            <td>Qualidade</td>
+                        <tr th:each="sono : ${sonos}">
+                            <td th:text="${sono.data}">Data</td>
+                            <td th:text="${sono.horasDormidas}">Quantidade de Horas</td>
+                            <td th:text="${sono.qualidade}">Qualidade</td>
                             <td>
-                                <a class="btn">Editar</a>
-                                <a class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
-                            </td>
+                                <a href="javascript:void(0);" 
+                                   class="btn" 
+                                   th:attr="data-id=${sono.id}, 
+                                            data-data=${sono.data},
+                                            data-horasDormidas=${sono.horasDormidas},
+                                            data-qualidade=${sono.qualidade}"
+                                   onclick="editSono(this)">
+                                   Editar
+                                </a>
+                                <a th:href="@{'/sono/excluir/' + ${sono.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                            </td>                        
                         </tr>
                     </tbody>
                 </table>
@@ -238,6 +255,44 @@
             </form>
         </div>
         
+        <div class="form-popup" id="editarRefeicaoForm">
+            <form method="post" class="form-container">
+                <input type="hidden" id="id" name="id">
+        
+                <label for="tipo">Tipo de Refeição:</label>
+                <input type="text" id="tipo" name="tipo" required>
+        
+                <label for="nome">Descrição da Refeição:</label>
+                <input type="text" id="nome" name="nome" required>
+        
+                <label for="quantidade">Quantidade de Calorias:</label>
+                <input type="number" id="quantidade" name="quantidade" required>
+        
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+        
+                <button type="submit" class="btn">Salvar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('editarRefeicaoForm')">Cancelar</button>
+            </form>
+        </div>
+
+        <div class="form-popup" id="editarSonoForm">
+            <form method="post" class="form-container">
+                <input type="hidden" id="id" name="id">
+        
+                <label for="horasDormidas">Horas Dormidas:</label>
+                <input type="number" id="horasDormidas" name="horasDormidas" required>
+        
+                <label for="qualidade">Qualidade:</label>
+                <input type="text" id="qualidade" name="qualidade" required>
+        
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+        
+                <button type="submit" class="btn">Salvar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('editarSonoForm')">Cancelar</button>
+            </form>
+        </div>
 
     </main>
 
@@ -287,8 +342,59 @@
               </form>
           `;
           document.querySelector("#editarExercicioForm form").setAttribute("action", `/exercicio/editar/${id}`);
-      }
-      
+        }
+
+        function editRefeicao(element) {
+            openForm('editarRefeicaoForm');
+            const id = element.getAttribute("data-id");
+            const data = element.getAttribute("data-data");
+            const tipo = element.getAttribute("data-tipo");
+            const nome = element.getAttribute("data-nome");
+            const quantidade = element.getAttribute("data-quantidade");
+
+            document.getElementById("editarRefeicaoForm").innerHTML = `
+                <form method="post" class="form-container" action="/refeicao/editar/${id}">
+                    <input type="hidden" name="id" value="${id}">
+                    <label for="tipo">Tipo de Refeição:</label>
+                    <input type="text" id="tipo" name="tipo" value="${tipo}" required>
+                    <label for="nome">Descrição da Refeição:</label>
+                    <input type="text" id="nome" name="nome" value="${nome}" required>
+                    <label for="quantidade">Quantidade de Calorias:</label>
+                    <input type="number" id="quantidade" name="quantidade" value="${quantidade}" required>
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" value="${data}" required>
+                    <button type="submit" class="btn">Salvar</button>
+                    <button type="button" class="btn cancel" onclick="closeForm('editarRefeicaoForm')">Cancelar</button>
+                </form>
+            `;
+        }
+
+        function editSono(element) {
+            openForm('editarSonoForm');
+            const id = element.getAttribute("data-id");
+            const data = element.getAttribute("data-data");
+            const horasDormidas = element.getAttribute("data-horasDormidas");
+            const qualidade = element.getAttribute("data-qualidade");
+
+            document.getElementById("editarSonoForm").innerHTML = `
+                <form method="post" class="form-container" action="/sono/editar/${id}">
+                    <input type="hidden" name="id" value="${id}">
+                    
+                    <label for="horasDormidas">Horas Dormidas:</label>
+                    <input type="number" id="horasDormidas" name="horasDormidas" value="${horasDormidas}" required>
+                    
+                    <label for="qualidade">Qualidade:</label>
+                    <input type="text" id="qualidade" name="qualidade" value="${qualidade}" required>
+                    
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" value="${data}" required>
+                    
+                    <button type="submit" class="btn">Salvar</button>
+                    <button type="button" class="btn cancel" onclick="closeForm('editarSonoForm')">Cancelar</button>
+                </form>
+            `;
+        }
+
     </script>
 
 
