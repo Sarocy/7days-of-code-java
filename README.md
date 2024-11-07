@@ -1,18 +1,14 @@
 # 7 Days of Code: Java com Spring Boot! 🚀
 
-## 💻 Dia 04: Criação dos Controladores e Rotas Básicas
+## 💻 Dia 07: Geração de Relatórios de Hábitos com Gráficos
 ### 🚀 O Desafio de Hoje
 
-No quarto dia do desafio, você vai criar os controladores que serão responsáveis por gerenciar as rotas e interações com os dados das entidades Exercicio, Refeicao e Sono. Eles definirão os endpoints para operações de CRUD, permitindo que o sistema gerencie registros de forma eficiente :)
+No nosso último dia de desafio fechamos nosso projeto criando relatórios para exibir informações sobre os hábitos do usuário. Usamos gráficos para mostrar dados como Média de Tempo Gasto em Exercícios, Média de Calorias Consumidas por Refeição e Média de Horas Dormidas.
 
 ### 🛠️ O que fizemos?
-- Criação dos Controladores:
-  - Criamos as classes ExercicioController, RefeicaoController e SonoController.
-  - Definimos as rotas principais /exercicio, /refeicao e /sono usando @RequestMapping.
+- Adicionamos uma nova seção na página `crud.html` para exibir relatórios, além de usarmos o Chart.js para criar gráficos que apresentam dados de `Exercicio`, `Refeicao` e `Sono` de maneira visual e interativa.
 
-- Definição das Rotas e Métodos:
-  - Implementamos o método GET para listar todos os registros em /listar.
-  - Implementamos o método POST para salvar novos registros em /salvar.
-  - Implementamos PUT para a atualização de registros existentes em /editar/{id}.
-  - Implementamos o método DELETE para excluir registros por ID em /excluir/{id}.
+- Criamos um `RelatorioService` que calcula as médias necessárias para os relatórios, consultando os repositórios e calculando médias, como tempo gasto em exercícios, calorias consumidas e horas dormidas.
+
+- Atualizamos os repositórios incluindo consultas para calcular as médias diretamente no banco de dados, usando anotações @Query no JPA. 
 
