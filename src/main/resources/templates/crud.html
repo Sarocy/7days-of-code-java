@@ -49,17 +49,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Data</td>
-                            <td>Nome</td>
-                            <td>Séries</td>
-                            <td>Repetições</td>
-                            <td>Carga</td>
-                            <td>Duração</td>
+                        <tr th:each="exercicio : ${exercicios}">
+                            <td th:text="${exercicio.data}">Data</td>
+                            <td th:text="${exercicio.nome}">Nome do Exercício</td>
+                            <td th:text="${exercicio.series}">Quantidade de Séries</td>
+                            <td th:text="${exercicio.repeticoes}">Quantidade de Repetições</td>
+                            <td th:text="${exercicio.carga}">Quantidade de Carga</td>
+                            <td th:text="${exercicio.tempo}">Duração</td>
                             
                             <td>
-                                <a class="btn">Editar</a>
-                                <a class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                              <a href="javascript:void(0);" 
+                              class="btn" 
+                              th:attr="data-id=${exercicio.id}, 
+                              data-data=${exercicio.data},
+                              data-nome=${exercicio.nome},
+                              data-series=${exercicio.series},
+                              data-repeticoes=${exercicio.repeticoes},
+                              data-carga=${exercicio.carga},
+                              data-tempo=${exercicio.tempo}"
+                              onclick="editExercicio(this)">
+                              Editar
+                           </a>
+                                <a th:href="@{'/exercicio/excluir/' + ${exercicio.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                             </td>
                         </tr>
                     </tbody>
@@ -129,7 +140,7 @@
 
         </section>
 
-        <!-- Formulários de Adição/Edição -->
+        <!-- Formulários de Adição -->
         
         <div class="form-popup" id="sonoForm">
             <form action="/sono/salvar" method="post" class="form-container">
@@ -198,6 +209,34 @@
                 <button type="button" class="btn cancel" onclick="closeForm('refeicaoForm')">Fechar</button>
             </form>
         </div>
+
+        <!-- Formulários de Edição -->
+        <div class="form-popup" id="editarExercicioForm">
+            <form method="post" class="form-container">
+                <input type="hidden" id="id" name="id">
+        
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+        
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+        
+                <label for="series">Quantidade de Séries:</label>
+                <input type="number" id="series" name="series" required>
+        
+                <label for="repeticoes">Quantidade de Repetições:</label>
+                <input type="number" id="repeticoes" name="repeticoes" required>
+        
+                <label for="carga">Carga (kg):</label>
+                <input type="number" id="carga" name="carga" step="0.1" required>
+        
+                <label for="tempo">Duração (min):</label>
+                <input type="number" id="tempo" name="tempo" required>
+        
+                <button type="submit" class="btn">Salvar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>
+            </form>
+        </div>
         
 
     </main>
@@ -210,6 +249,46 @@
         function closeForm(formId) {
             document.getElementById(formId).style.display = "none";
         }
+
+        function editExercicio(element) {
+          openForm('editarExercicioForm'); 
+          const id = element.getAttribute("data-id");
+          const data = element.getAttribute("data-data");
+          const nome = element.getAttribute("data-nome");
+          const series = element.getAttribute("data-series");
+          const repeticoes = element.getAttribute("data-repeticoes");
+          const carga = element.getAttribute("data-carga");
+          const tempo = element.getAttribute("data-tempo");
+      
+          document.getElementById("editarExercicioForm").innerHTML = `
+              <form method="post" class="form-container" action="/exercicio/editar/${id}">
+                  <input type="hidden" name="id" value="${id}">
+                  
+                  <label for="data">Data:</label>
+                  <input type="date" id="data" name="data" value="${data}" required>
+                  
+                  <label for="nome">Nome:</label>
+                  <input type="text" id="nome" name="nome" value="${nome}" required>
+                  
+                  <label for="series">Quantidade de Séries:</label>
+                  <input type="number" id="series" name="series" value="${series}" required>
+                  
+                  <label for="repeticoes">Quantidade de Repetições:</label>
+                  <input type="number" id="repeticoes" name="repeticoes" value="${repeticoes}" required>
+                  
+                  <label for="carga">Carga (kg):</label>
+                  <input type="number" id="carga" name="carga" value="${carga}" step="0.1" required>
+                  
+                  <label for="tempo">Duração (min):</label>
+                  <input type="number" id="tempo" name="tempo" value="${tempo}" required>
+                  
+                  <button type="submit" class="btn">Salvar</button>
+                  <button type="button" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>
+              </form>
+          `;
+          document.querySelector("#editarExercicioForm form").setAttribute("action", `/exercicio/editar/${id}`);
+      }
+      
     </script>
 
 
